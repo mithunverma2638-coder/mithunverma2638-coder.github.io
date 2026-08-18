@@ -7,25 +7,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080c14;
-    --bg2: #0d1320;
-    --surface: #111827;
-    --border: rgba(99,179,237,0.15);
-    --accent: #38bdf8;
-    --accent2: #818cf8;
+    --bg: #050816;
+    --bg2: #0a192f;
+    --bg3: #112240;
+    --surface: #0d1b30;
+    --border: rgba(0,191,255,0.15);
+    --accent: #00bfff;
+    --accent2: #3b82f6;
     --accent3: #34d399;
+    --accent4: #f472b6;
     --gold: #fbbf24;
     --text: #e2e8f0;
-    --muted: #64748b;
+    --muted: #94a3b8;
     --white: #f8fafc;
+    --gradient-main: linear-gradient(135deg, #00bfff 0%, #3b82f6 45%, #818cf8 100%);
+    --gradient-warm: linear-gradient(135deg, #fbbf24 0%, #f472b6 100%);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background: linear-gradient(135deg, #050816 0%, #0a192f 50%, #112240 100%);
+    background-attachment: fixed;
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
@@ -48,9 +53,11 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
+      radial-gradient(circle at 20% 20%, rgba(0,191,255,0.12), transparent 35%),
+      radial-gradient(circle at 80% 70%, rgba(59,130,246,0.12), transparent 35%),
+      linear-gradient(rgba(0,191,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,191,255,0.04) 1px, transparent 1px);
+    background-size: auto, auto, 48px 48px, 48px 48px;
     pointer-events: none;
     z-index: 0;
   }
@@ -64,12 +71,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 18px 5%;
-    background: rgba(8,12,20,0.85);
+    background: rgba(5,8,22,0.85);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
   .nav-logo {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 1.2rem;
     color: var(--white);
@@ -78,7 +85,7 @@
   .nav-logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem;
     color: var(--white);
     text-decoration: none;
@@ -116,6 +123,14 @@
     pointer-events: none;
     animation: pulse 8s ease-in-out infinite reverse;
   }
+  .hero-glow3 {
+    position: absolute;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(244,114,182,0.10) 0%, transparent 70%);
+    top: 30%; left: 40%;
+    pointer-events: none;
+    animation: pulse 10s ease-in-out infinite;
+  }
   @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.15); opacity: 0.7; }
@@ -130,7 +145,7 @@
     border: 1px solid rgba(56,189,248,0.25);
     border-radius: 100px;
     padding: 6px 16px;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     color: var(--accent);
     letter-spacing: 1.5px;
@@ -148,7 +163,7 @@
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
   .hero-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(3rem, 8vw, 6.5rem);
     font-weight: 800;
     line-height: 1;
@@ -158,25 +173,34 @@
     animation: fadeUp 0.7s 0.1s ease both;
   }
   .hero-name .highlight {
-    -webkit-text-stroke: 2px var(--accent);
+    background: var(--gradient-main);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 2px transparent;
     color: transparent;
+    animation: gradientShift 6s ease-in-out infinite;
+  }
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
   .hero-role {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(0.85rem, 2vw, 1rem);
     color: var(--accent);
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     animation: fadeUp 0.7s 0.2s ease both;
   }
   .hero-desc {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--muted);
     max-width: 560px;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     animation: fadeUp 0.7s 0.3s ease both;
-    line-height: 1.8;
+    line-height: 1.7;
   }
   .hero-desc strong { color: var(--text); }
 
@@ -190,18 +214,19 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent);
+    background: var(--gradient-main);
+    background-size: 200% 200%;
     color: var(--bg);
     padding: 14px 28px;
     border-radius: 6px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 0.9rem;
     text-decoration: none;
     letter-spacing: 0.5px;
-    transition: all 0.2s;
+    transition: all 0.25s;
   }
-  .btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); }
+  .btn-primary:hover { background-position: 100% 50%; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,0.25); }
   .btn-outline {
     display: inline-flex;
     align-items: center;
@@ -210,7 +235,7 @@
     color: var(--text);
     padding: 14px 28px;
     border-radius: 6px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;
@@ -222,22 +247,27 @@
   .hero-stats {
     display: flex;
     gap: 48px;
-    margin-top: 72px;
-    padding-top: 40px;
+    margin-top: 40px;
+    padding-top: 28px;
     border-top: 1px solid var(--border);
     animation: fadeUp 0.7s 0.5s ease both;
     flex-wrap: wrap;
   }
   .stat-num {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.2rem;
     font-weight: 800;
     color: var(--white);
     line-height: 1;
   }
-  .stat-num span { color: var(--accent); }
+  .stat-num span {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .stat-label {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.7rem;
     color: var(--muted);
     letter-spacing: 1px;
@@ -254,7 +284,7 @@
   .section-wrap { padding: 100px 5%; }
   .section-header { margin-bottom: 60px; }
   .section-tag {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     color: var(--accent);
     letter-spacing: 3px;
@@ -266,11 +296,11 @@
   }
   .section-tag::before {
     content: '';
-    width: 32px; height: 1px;
-    background: var(--accent);
+    width: 32px; height: 2px;
+    background: var(--gradient-main);
   }
   .section-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 800;
     color: var(--white);
@@ -314,7 +344,7 @@
     margin-bottom: 16px;
   }
   .skill-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--white);
@@ -331,7 +361,7 @@
     color: var(--accent);
     padding: 3px 10px;
     border-radius: 4px;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.5px;
   }
@@ -363,8 +393,12 @@
     border: 2px solid var(--bg);
     box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
   }
+  .timeline-item:nth-child(2)::before { background: var(--accent2); box-shadow: 0 0 0 3px rgba(129,140,248,0.2); }
+  .timeline-item:nth-child(3)::before { background: var(--accent3); box-shadow: 0 0 0 3px rgba(52,211,153,0.2); }
+  .timeline-item:nth-child(4)::before { background: var(--gold); box-shadow: 0 0 0 3px rgba(251,191,36,0.2); }
+  .timeline-item:nth-child(5)::before { background: var(--accent4); box-shadow: 0 0 0 3px rgba(244,114,182,0.2); }
   .timeline-period {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     color: var(--accent);
     letter-spacing: 1px;
@@ -372,7 +406,7 @@
     text-transform: uppercase;
   }
   .timeline-role {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--white);
@@ -414,6 +448,19 @@
     position: relative;
     overflow: hidden;
   }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent4);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: bottom;
+  }
+  .project-card:nth-child(4n+2)::before { background: var(--accent2); }
+  .project-card:nth-child(4n+3)::before { background: var(--accent3); }
+  .project-card:nth-child(4n+4)::before { background: var(--gold); }
   .project-card::after {
     content: '';
     position: absolute;
@@ -422,15 +469,16 @@
     pointer-events: none;
   }
   .project-card:hover { border-color: rgba(56,189,248,0.4); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .project-card:hover::before { transform: scaleY(1); }
   .project-num {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.7rem;
     color: var(--muted);
     letter-spacing: 2px;
     margin-bottom: 16px;
   }
   .project-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--white);
@@ -449,7 +497,7 @@
     margin-bottom: 20px;
   }
   .project-link {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     color: var(--accent);
     text-decoration: none;
@@ -477,8 +525,23 @@
     gap: 16px;
     align-items: flex-start;
     transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
   }
-  .cert-card:hover { border-color: rgba(251,191,36,0.4); transform: translateX(4px); }
+  .cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: bottom;
+  }
+  .cert-card:nth-child(3n+2)::before { background: var(--accent); }
+  .cert-card:nth-child(3n+3)::before { background: var(--accent3); }
+  .cert-card:hover { border-color: rgba(251,191,36,0.4); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+  .cert-card:hover::before { transform: scaleY(1); }
   .cert-icon {
     width: 40px; height: 40px;
     border-radius: 8px;
@@ -489,7 +552,7 @@
     flex-shrink: 0;
   }
   .cert-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.92rem;
     font-weight: 700;
     color: var(--white);
@@ -497,7 +560,7 @@
     margin-bottom: 4px;
   }
   .cert-issuer {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.68rem;
     color: var(--muted);
     letter-spacing: 0.5px;
@@ -530,7 +593,7 @@
     pointer-events: none;
   }
   .contact-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--white);
@@ -538,7 +601,12 @@
     margin-bottom: 20px;
     line-height: 1.1;
   }
-  .contact-title span { color: var(--accent); }
+  .contact-title span {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .contact-desc { color: var(--muted); margin-bottom: 32px; }
   .contact-links { display: flex; flex-direction: column; gap: 16px; }
   .contact-link {
@@ -570,7 +638,7 @@
     text-align: center;
     padding: 40px 5%;
     border-top: 1px solid var(--border);
-    font-family: 'Space Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     color: var(--muted);
     letter-spacing: 1px;
@@ -612,15 +680,16 @@
 <section class="hero" id="about">
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
+  <div class="hero-glow3"></div>
   <div class="hero-content">
-    <div class="hero-badge">Available for opportunities</div>
+    <div class="hero-badge">Open to Data Analyst & Power BI Developer roles</div>
     <h1 class="hero-name">MITHUN<br><span class="highlight">VERMA</span></h1>
-    <p class="hero-role">Data Analyst &nbsp;/&nbsp; Power BI Developer &nbsp;/&nbsp; SQL Expert</p>
+    <p class="hero-role">I turn business operations into business decisions.</p>
     <p class="hero-desc">
-      Turning raw data into <strong>actionable decisions</strong>. 6+ years of operations & logistics experience, now building <strong>Power BI dashboards</strong>, <strong>SQL pipelines</strong>, and <strong>Python-based analytics</strong> that drive real business impact.
+      6+ years on the frontline — <strong>Customer Service</strong>, <strong>CRM</strong>, and <strong>Logistics</strong> — gave me a real understanding of how businesses actually run. I now bring that context into <strong>Data Analytics</strong>, building <strong>Power BI</strong> dashboards and <strong>SQL/Python</strong> analysis that leadership teams actually use to decide, not just look at.
     </p>
     <div class="hero-actions">
-      <a href="https://github.com/mithunverma2638-coder" target="_blank" class="btn-primary">
+      <a href="https://github.com/mithun-data-analyst" target="_blank" class="btn-primary">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
@@ -642,7 +711,7 @@
         <div class="stat-label">Certifications</div>
       </div>
       <div>
-        <div class="stat-num">6<span>+</span></div>
+        <div class="stat-num">13<span>+</span></div>
         <div class="stat-label">Projects Built</div>
       </div>
       <div>
@@ -708,7 +777,7 @@
 </section>
 
 <!-- EXPERIENCE -->
-<section class="section-wrap" id="experience" style="background: rgba(13,19,32,0.5);">
+<section class="section-wrap" id="experience" style="background: rgba(10,25,47,0.55);">
   <div class="section-header reveal">
     <div class="section-tag">Career Journey</div>
     <h2 class="section-title">Work Experience</h2>
@@ -786,7 +855,7 @@
         <span class="tag green">Scikit-learn</span>
         <span class="tag purple">ANOVA</span>
       </div>
-      <a href="https://github.com/mithunverma2638-coder/smartphone-usage-analysis" class="project-link" target="_blank">View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/smartphone-usage-analysis" class="project-link" target="_blank">View Project →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-num">02</div>
@@ -797,7 +866,7 @@
         <span class="tag gold">Excel</span>
         <span class="tag purple">DAX</span>
       </div>
-      <a href="https://github.com/mithunverma2638-coder/Amazon-Sales-Analysis" class="project-link" target="_blank">View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/Amazon-Sales-Analysis" class="project-link" target="_blank">View Project →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-num">03</div>
@@ -808,7 +877,7 @@
         <span class="tag">Power BI</span>
         <span class="tag gold">Excel</span>
       </div>
-      <a href="https://github.com/mithunverma2638-coder/Pizza_Sales_Dashboard-and-Analysis-SQL-and-Power-BI-" class="project-link" target="_blank">View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/Pizza_Sales_Dashboard-and-Analysis-SQL-and-Power-BI-" class="project-link" target="_blank">View Project →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-num">04</div>
@@ -819,7 +888,7 @@
         <span class="tag green">Pandas</span>
         <span class="tag green">Matplotlib</span>
       </div>
-      <a href="https://github.com/mithunverma2638-coder/Uber-data-analysis" class="project-link" target="_blank">View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/Uber-data-analysis" class="project-link" target="_blank">View Project →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-num">05</div>
@@ -830,7 +899,7 @@
         <span class="tag green">Seaborn</span>
         <span class="tag purple">EDA</span>
       </div>
-      <a href="https://github.com/mithunverma2638-coder/Diwali_Sales_Analysis" class="project-link" target="_blank" >View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/Diwali_Sales_Analysis" class="project-link" target="_blank" >View Project →</a>
       
     </div>
     <div class="project-card reveal">
@@ -844,7 +913,7 @@
         <span class="tag purple">MySQL</span>
     </div>
     
-      <a href="https://github.com/mithunverma2638-coder/Retail-Sales-Data-Analysis-Project" class="project-link" target="_blank" >View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/Retail-Sales-Data-Analysis-Project" class="project-link" target="_blank" >View Project →</a>
       
     </div>
       <div class="project-card reveal">
@@ -857,7 +926,72 @@
         <span class="tag gold">HTML</span>
         <span class="tag green">DAX</span>
       </div>
-      <a href="https://github.com/mithunverma2638-coder/Comic-Universe-Marvel-vs-DC-Analysis" class="project-link" target="_blank">View Project →</a>
+      <a href="https://github.com/mithun-data-analyst/Comic-Universe-Marvel-vs-DC-Analysis" class="project-link" target="_blank">View Project →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">08</div>
+      <div class="project-title">Amazon Financial Insights Dashboard</div>
+      <div class="project-desc">Power BI dashboard delivering a comprehensive financial analysis of Amazon's performance — helping stakeholders quickly read key financial metrics, trends, and regional performance through interactive visuals.</div>
+      <div class="project-tools">
+        <span class="tag">Power BI</span>
+        <span class="tag gold">Excel</span>
+        <span class="tag purple">DAX</span>
+      </div>
+      <a href="https://github.com/mithun-data-analyst/Amazon-Financial-Insights-Dashboard" class="project-link" target="_blank">View Project →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">09</div>
+      <div class="project-title">Mobile Sales Dashboard</div>
+      <div class="project-desc">Interactive Power BI dashboard analyzing mobile sales performance across regions, brands, and time periods — with KPIs, trend analysis, and category-wise breakdowns for strategic insights.</div>
+      <div class="project-tools">
+        <span class="tag">Power BI</span>
+        <span class="tag gold">Excel</span>
+        <span class="tag purple">DAX</span>
+      </div>
+      <a href="https://github.com/mithun-data-analyst/Mobile-Sales-Dashboard-" class="project-link" target="_blank">View Project →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">10</div>
+      <div class="project-title">Books Orders Dashboard</div>
+      <div class="project-desc">Power BI dashboard analyzing book order data — surfacing customer preferences, sales trends, and category-wise performance for the publishing/retail domain.</div>
+      <div class="project-tools">
+        <span class="tag">Power BI</span>
+        <span class="tag gold">Excel</span>
+        <span class="tag purple">DAX</span>
+      </div>
+      <a href="https://github.com/mithun-data-analyst/-Books-Orders-Dashboard---Power-BI" class="project-link" target="_blank">View Project →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">11</div>
+      <div class="project-title">Product Sales Dashboard</div>
+      <div class="project-desc">Power BI dashboard tracking product-level sales performance with KPI cards, category breakdowns, and dynamic filters for quick business insight.</div>
+      <div class="project-tools">
+        <span class="tag">Power BI</span>
+        <span class="tag gold">Excel</span>
+      </div>
+      <a href="https://github.com/mithun-data-analyst/-Product-Sales-Dashboard" class="project-link" target="_blank">View Project →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">12</div>
+      <div class="project-title">Daikin Buyback Analysis</div>
+      <div class="project-desc">Python-based analysis of Daikin's buyback data, exploring patterns and trends to surface actionable insights for business decision-making.</div>
+      <div class="project-tools">
+        <span class="tag green">Python</span>
+        <span class="tag green">Pandas</span>
+        <span class="tag purple">EDA</span>
+      </div>
+      <a href="https://github.com/mithun-data-analyst/Daikin-Analysis" class="project-link" target="_blank">View Project →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">13</div>
+      <div class="project-title">Selsmart Analysis</div>
+      <div class="project-desc">Python-based data analysis project exploring sales and performance trends, translating raw data into clear, actionable insights.</div>
+      <div class="project-tools">
+        <span class="tag green">Python</span>
+        <span class="tag green">Pandas</span>
+        <span class="tag purple">EDA</span>
+      </div>
+      <a href="https://github.com/mithun-data-analyst/selsmart-analysis" class="project-link" target="_blank">View Project →</a>
     </div>
       <div class="project-link-wrapper">
     
@@ -867,7 +1001,7 @@
 </section>
 
 <!-- CERTIFICATIONS -->
-<section class="section-wrap" id="certifications" style="background: rgba(13,19,32,0.5);">
+<section class="section-wrap" id="certifications" style="background: rgba(10,25,47,0.55);">
   <div class="section-header reveal">
     <div class="section-tag">Credentials</div>
     <h2 class="section-title">Certifications</h2>
@@ -963,11 +1097,11 @@
         <div class="contact-link-icon" style="background:rgba(56,189,248,0.1);">in</div>
         linkedin.com/in/mithun-verma-526339209
       </a>
-      <a href="https://github.com/mithunverma2638-coder" target="_blank" class="contact-link">
+      <a href="https://github.com/mithun-data-analyst" target="_blank" class="contact-link">
         <div class="contact-link-icon" style="background:rgba(255,255,255,0.05);">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </div>
-        github.com/mithunverma2638-coder
+        github.com/mithun-data-analyst
       </a>
       <div class="contact-link" style="cursor:default;">
         <div class="contact-link-icon" style="background:rgba(251,191,36,0.1);">📍</div>
